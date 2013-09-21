@@ -1,6 +1,6 @@
 <?php
 	$functions = get_defined_functions();
-	
+
 	foreach($functions['internal'] as $f) {
 		$r = new ReflectionFunction($f);
 		$p = $r->getParameters();
@@ -11,7 +11,7 @@
 			$pName = $i->getName();
 			if($pName == '...' || empty($pName)) continue;
 			$z .= '$'.$i->getName();
-			if($i->isDefaultValueAvailable()) { 				
+			if($i->isDefaultValueAvailable()) {
 				$z .= ' = ' . $i->getDefaultValue();
 			}
 
