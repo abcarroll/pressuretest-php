@@ -11,10 +11,10 @@ leak and be killed by the kernel, if you're lucky.
 
 It has no `sleep()` or `usleep()` so it will likely consume 100% CPU until you kill it.
 
-# # Known Leaks # # 
+## Known Leaks ##
 * `create_function()` seems to leak a massive amount of memory.
 
-# # Other deamon / -CLI issues # # 
+## Other deamon / -CLI issues ##
 * There is no way to gracefully free memory held by an object except removing all references for it or wait for the GC to pick it up.  You cannot force removal of an object by just calling the destructor, or doing `unset($this)`.  I find this annoying.
 * The ncurses library is horrifically underdocumented and unnecessarily overcomplicated.  Please see my unfinished __uncurses__ project here on github.
 
