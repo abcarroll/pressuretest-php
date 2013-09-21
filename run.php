@@ -16,7 +16,9 @@
 	}
 
 	echo "Mem Usage Starting: " . mem_usage() . "\n";
+	$next_report = time() + 30;
 	for($y = 0; $y<100000000;$y++) { 
+		
 		$test = function($lulz) {
 			$zend_version = [zend_version()]; $zend_version = [$zend_version];
 			$func_num_args = [func_num_args()]; $func_num_args = [$func_num_args];
@@ -133,8 +135,9 @@
 
 		$a = [$test];
 		$a[] = $a;
-		if(($y%100000)==0) { 
+		if((time() > $next_report)) { 
 			echo "Iter " . number_format($y) . ": " . mem_usage();
 			echo " | /proc says: ". trim(file_get_contents('/proc/' . posix_getpid() . '/statm')) . "\n";
+			$next_report = time()+30;
 		}
 	}
