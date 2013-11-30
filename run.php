@@ -125,6 +125,17 @@
 			$glue = " "; $pieces = ['Hello', 'World'];
 			$implode = [implode($glue, $pieces)]; $implode = [$implode];
 			$join = [join($glue, $pieces)]; $join = [$join];
+			$value = [
+				'a' => 'bigger',
+				'array' => 'needs',
+				'to' => 'go',
+				'here' => [
+					'and', 'here', 'too'
+				]
+			];
+			$json_encode = [json_encode($value)]; $json_encode = [$json_encode]; // Note: options not passed
+			$json_decode = [json_decode($json_encode[0][0])]; $json_decode = [$json_decode]; // left out different OPTIONS and DEPTHS
+			//$json_last_error = [json_last_error()]; $json_last_error = [$json_last_error];
 		};
 
 		$test("For the");
