@@ -1,15 +1,18 @@
 # PressureTest for PHP #
 
 So here you have, the "Pressure Test".  It's meant to see if it's leaky.  If you've ever replaced 
-a spicot or plumbing, you're well aware of the pressure test afterwards.
+a spigot or plumbing, you're well aware of the pressure test afterwards.
 
 It is an attempt to call __every__ PHP function that is thought to not leak memory, to see if it 
-does or not not actually leak memory.
+does or not not actually leak memory.  It doesn't call __every__ function, please help improve that.
 
 This code will leak horrifically on pre-PHP 5.3 installs.  Just don't even download it.  It will
 leak and be killed by the kernel, if you're lucky.
 
 It has no `sleep()` or `usleep()` so it will likely consume 100% CPU until you kill it.
+
+## To Do ##
+* Call a lot more functions, and call a lot more functions in a lot of different ways.
 
 ## Known Leaks ##
 * `create_function()` seems to leak a massive amount of memory.
