@@ -3,6 +3,8 @@
 	// So Far, the only one I've seen is create_function()
 	// Even closures don't leak memory.
 
+	$start_time = microtime(1);
+
 	function mem_usage() {
 		$x = memory_get_usage();
 		$y = memory_get_usage(1);
@@ -65,7 +67,8 @@
 			// Note: @ here, edge case iterating
 			$class_alias = [@class_alias($user_class_name, $alias_name, $autoload)]; $class_alias = [$class_alias];
 			$get_included_files = [get_included_files()]; $get_included_files = [$get_included_files];
-			$get_required_files = [get_required_files()]; $get_required_files = [$get_required_files];
+			// Broken in HHVM
+			//$get_required_files = [get_required_files()]; $get_required_files = [$get_required_files];
 			
 			$time = "March 13 2013";
 			$strtotime = [strtotime($time)]; $strtotime = [$strtotime]; // Note; parms changed
@@ -127,7 +130,7 @@
 			$join = [join($glue, $pieces)]; $join = [$join];
 		};
 
-		$test("For the");
+		$test("Just a test string");
 		
 		$stdclass = new StdClass();
 		$stdclass->foo = "Pressure test";
@@ -138,6 +141,7 @@
 		if((time() > $next_report)) { 
 			echo "Iter " . number_format($y) . ": " . mem_usage();
 			echo " | /proc says: ". trim(file_get_contents('/proc/' . posix_getpid() . '/statm')) . "\n";
+			echo " -> Time is " . sprintf("%f", microtime(1) - $start_time) . "\n";
 			$next_report = time()+30;
 		}
 	}
